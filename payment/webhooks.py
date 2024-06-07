@@ -3,7 +3,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from orders.models import Order
-from .views import payment_completed
+from .tasks import payment_completed
 
 @csrf_exempt # 모든 POST 요청에 기본적으로 수행되는 CSRF 유효성 검사를 수행하지 못하도록 한다.
 def stripe_webhook(request):

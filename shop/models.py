@@ -1,12 +1,10 @@
 from django.db import models
 from django.urls import reverse
-from parler.models import TranslatableModel, TranslatedFields
 
 class Category(models.Model):
-    translations = TranslatedFields(
-    name = models.CharField(max_length=200),
+    name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True) # 중복을 허용하지 않는다.
-    )
+
     class Meta:
         ordering = ['name']
         indexes = [models.Index(fields=['name']),]
@@ -20,14 +18,11 @@ class Category(models.Model):
         return reverse('shop:product_list_by_category', args=[self.slug])
 
 class Product(models.Model):
-    translations = TranslatedFields(
-        name = models.CharField(max_length=200),
-        slug = models.SlugField(max_length=200),
-        description = models.TextField(blank=True)
-    )
-    
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
+    description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2) #화폐 금액을 저장 , 십진수타입 , 소수점 반올림시 문제를 일으키지 않는다.
     #decimal_places 소수점 몇자리 , 소수점 2자리 까지 허용
     available = models.BooleanField(default=True)
