@@ -10,13 +10,13 @@ def coupon_apply(request):
     form = CouponApplyForm(request.POST)
     if form.is_valid():
         code = form.cleaned_data['code']
-        try :
-            coupon = Coupon.objects.get(code__iexact=code, #iexact: 대소문자를 구분하지 않고 일치하는 데이터 찾기
-                                        valid_from__lte=now, #lte: 작거나 같음
-                                        valid_to__gte=now, #gte: 크거나 같음
+        try:
+            coupon = Coupon.objects.get(code__iexact=code, #iexact 대소문자를 구분하지 않고 일치하는 데이터 찾기
+                                        valid_from__lte=now, #lte 작거나 같음
+                                        valid_to__gte=now, #gte 크거나 같음
                                         active=True)
             request.session['coupon_id'] = coupon.id
         except Coupon.DoesNotExist:
             request.session['coupon_id'] = None
-        return redirect('cart:cart_detail')
+    return redirect('cart:cart_detail')
 

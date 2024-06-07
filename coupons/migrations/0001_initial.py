@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('code', models.CharField(max_length=50, unique=True)),
                 ('valid_from', models.DateTimeField()),
                 ('valid_to', models.DateTimeField()),
-                ('discount', models.IntegerField(help_text='Percentage value (0 to 100)', validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)])),
+                ('discount', models.IntegerField(help_text='Pecentage value (0 to 100)', validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)])),
                 ('active', models.BooleanField()),
             ],
         ),

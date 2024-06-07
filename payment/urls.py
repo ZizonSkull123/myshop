@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views, webhooks
-from django.utils.translation import gettext_lazy as _
 
 app_name = 'payment'
 
